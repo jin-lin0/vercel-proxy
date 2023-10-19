@@ -3,9 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Vercel Proxy</title>
   </head>
   <body>
-    <h1>Vercel Proxy</h1>
+    <div class="SearchBar">
+      <input type="text" id="search-input" />
+      <button id="search-button">Submit</button>
+    </div>
+    <script>
+      const searchInput = document.getElementById("search-input");
+      const searchButton = document.getElementById("search-button");
+      searchButton.addEventListener("click", () => {
+        const inputValue = searchInput.value;
+        const protocol = inputValue.startsWith("https")
+          ? "/proxy"
+          : "/httpproxy";
+        const jumpUrl = location.origin + protocol + inputValue.split(":/")[1];
+        console.log(jumpUrl);
+        window.open(jumpUrl, "__blank");
+      });
+    </script>
   </body>
 </html>
