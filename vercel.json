@@ -35,9 +35,12 @@
     {
       "source": "proxy/api.chatanywhere.com.cn/v1/chat/completions",
       "destination": "https://api.chatanywhere.com.cn/v1/chat/completions",
-      "headers": {
-        "Authorization": "Bearer sk-9u4ShMxmu5TtPlQ86Xfa8dbuxs6bu48dmqjaDoMRxLoYCQSL"
-      }
+      "headers": [
+        {
+          "key": "Authorizationl",
+          "value": "Bearer sk-9u4ShMxmu5TtPlQ86Xfa8dbuxs6bu48dmqjaDoMRxLoYCQSL"
+        }
+      ]
     },
     { "source": "/proxy/:match/:url*", "destination": "https://:match/:url*" },
     {
