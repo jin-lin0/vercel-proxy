@@ -14,7 +14,8 @@
           "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
         }
       ]
-    },{
+    },
+    {
       "source": "/httpproxy/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
@@ -31,6 +32,13 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "proxy/api.chatanywhere.com.cn/v1/chat/completions",
+      "destination": "https://api.chatanywhere.com.cn/v1/chat/completions",
+      "headers": {
+        "Authorization": "Bearer sk-9u4ShMxmu5TtPlQ86Xfa8dbuxs6bu48dmqjaDoMRxLoYCQSL"
+      }
+    },
     { "source": "/proxy/:match/:url*", "destination": "https://:match/:url*" },
     {
       "source": "/proxy/:match/:url*/",
