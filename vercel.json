@@ -45,5 +45,12 @@
       "source": "/httpproxy/:match/:url*/",
       "destination": "http://:match/:url*/"
     }
+  ],
+
+  "crons": [
+    {
+      "path": "/api/log",
+      "schedule": "0 3 * * *"
+    }
   ]
 }
