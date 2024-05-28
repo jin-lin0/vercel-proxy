@@ -11,7 +11,6 @@ export default async (req, res) => {
     const collection = db.collection("log");
 
     const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
-    console.log(req.headers["x-forwarded-for"], req.connection.remoteAddress);
     const { method, url } = req;
     const userAgent = req.headers["user-agent"];
     const ipinfoToken = process.env.IPINFO_TOKEN;
@@ -19,15 +18,16 @@ export default async (req, res) => {
       headers: { Authorization: `Bearer ${ipinfoToken}` },
     });
 
+    console.log(geoInfo.data);
+
     const logEntry = {
       ip,
       method,
       url,
       userAgent,
-      geoInfo: geoInfo.data,
       timestamp: new Date(),
     };
-    await collection.insertOne(logEntry);
+    await collection.insertOne(Object.assign({}, logEntry, geoInfo.data));
     res.status(200).json(logEntry);
   } catch (error) {
     console.error(error);
