@@ -26,6 +26,7 @@ export default async (req, res) => {
 
     console.log(geoInfo.data);
     console.log(ip);
+    console.log(req.headers["x-forwarded-for"]);
 
     const logEntry = {
       ip,
