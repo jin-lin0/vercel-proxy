@@ -25,7 +25,9 @@ export default async (req, res) => {
       method,
       url,
       userAgent,
-      timestamp: new Date(),
+      timestamp: new Date().toLocaleString("zh-CN", {
+        timeZone: "Asia/Shanghai",
+      }),
     };
     await collection.insertOne(Object.assign({}, logEntry, geoInfo.data));
     res.status(200).json(logEntry);
