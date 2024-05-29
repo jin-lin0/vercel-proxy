@@ -62,10 +62,16 @@
       const searchInput = document.getElementById("search-input");
       const searchButton = document.getElementById("search-button");
       searchButton.addEventListener("click", () => {
-        const inputValue = searchInput.value;
-        const protocol = inputValue.startsWith("https")
-          ? "/proxy"
-          : "/httpproxy";
+        let inputValue = searchInput.value.trim();
+        let protocol = "/proxy";
+        if (
+          !inputValue.startsWith("http://") &&
+          !inputValue.startsWith("https://")
+        ) {
+          inputValue = "https://" + inputValue;
+        } else if (inputValue.startsWith("http")) {
+          protocol = "/httpproxy";
+        }
         const jumpUrl = location.origin + protocol + inputValue.split(":/")[1];
         console.log(jumpUrl);
         window.open(jumpUrl, "__blank");
