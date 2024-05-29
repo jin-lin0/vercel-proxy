@@ -10,19 +10,13 @@ export default async (req, res) => {
     const db = client.db("vercel");
     const collection = db.collection("log");
 
-    // const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const { method, url } = req;
     const userAgent = req.headers["user-agent"];
     const ipinfoToken = process.env.IPINFO_TOKEN;
-    const params = {
+    const geoInfo = await axios.get(`https://ipinfo.io/${ip}/geo`, {
       headers: { Authorization: `Bearer ${ipinfoToken}` },
-    };
-    const externalIP = await axios.get(
-      "https://api.ipify.org?format=json",
-      params
-    );
-    const ip = externalIP.data.ip;
-    const geoInfo = await axios.get(`https://ipinfo.io/${ip}/geo`, params);
+    });
 
     console.log(geoInfo.data);
     console.log(ip);
