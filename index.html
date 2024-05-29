@@ -110,5 +110,19 @@
         window.open(jumpUrl, "__blank");
       });
     </script>
+    <script>
+      async function fetchIPAndLog() {
+        try {
+          const ipResponse = await fetch("https://api.ipify.org?format=json");
+          const ipData = await ipResponse.json();
+          const ip = ipData.ip;
+          const logResponse = await fetch(`/api/log?ip=${ip}`);
+          const logData = await logResponse.json();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+      fetchIPAndLog();
+    </script>
   </body>
 </html>

@@ -9,8 +9,8 @@ export default async (req, res) => {
     });
     const db = client.db("vercel");
     const collection = db.collection("log");
-
-    const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    const { ip } = req.query;
+    // const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const { method, url } = req;
     const userAgent = req.headers["user-agent"];
     const ipinfoToken = process.env.IPINFO_TOKEN;
